@@ -12,6 +12,8 @@ namespace SiteArchi3D
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ProjetSiteArchi3DEntities : DbContext
     {
@@ -38,5 +40,20 @@ namespace SiteArchi3D
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Création_de_Projet> Création_de_Projet { get; set; }
         public virtual DbSet<Projet> Projet { get; set; }
+    
+        public virtual ObjectResult<sp_architecte_Result> sp_architecte()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_architecte_Result>("sp_architecte");
+        }
+    
+        public virtual ObjectResult<sp_modelisateur_Result> sp_modelisateur()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_modelisateur_Result>("sp_modelisateur");
+        }
+    
+        public virtual ObjectResult<sp_promoteur_Result> sp_promoteur()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_promoteur_Result>("sp_promoteur");
+        }
     }
 }

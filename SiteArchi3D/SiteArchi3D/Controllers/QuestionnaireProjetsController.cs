@@ -48,7 +48,7 @@ namespace SiteArchi3D.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idQuestionnaire,xidCréaProjet,Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10")] QuestionnaireProjet questionnaireProjet)
+        public ActionResult Create([Bind(Include = "idQuestionnaire,Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10")] QuestionnaireProjet questionnaireProjet)
         {
             if (ModelState.IsValid)
             {

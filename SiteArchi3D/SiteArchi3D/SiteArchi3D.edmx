@@ -298,6 +298,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_architecte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_modelisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_promoteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ProjetSiteArchi3DModelStoreContainer">
           <EntitySet Name="Architecte" EntityType="Self.Architecte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
@@ -649,6 +652,9 @@
             <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
             <End Role="Projet" EntitySet="Projet" />
           </AssociationSet>
+          <FunctionImport Name="sp_architecte" ReturnType="Collection(ProjetSiteArchi3DModel.sp_architecte_Result)" />
+          <FunctionImport Name="sp_modelisateur" ReturnType="Collection(ProjetSiteArchi3DModel.sp_modelisateur_Result)" />
+          <FunctionImport Name="sp_promoteur" ReturnType="Collection(ProjetSiteArchi3DModel.sp_promoteur_Result)" />
         </EntityContainer>
         <EntityType Name="Création_de_Projet">
           <Key>
@@ -765,6 +771,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_architecte_Result">
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="qualité" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_modelisateur_Result">
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="qualité" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_promoteur_Result">
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="qualité" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -909,6 +930,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_architecte" FunctionName="ProjetSiteArchi3DModel.Store.sp_architecte">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_architecte_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prénom" ColumnName="prénom" />
+                <ScalarProperty Name="qualité" ColumnName="qualité" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_modelisateur" FunctionName="ProjetSiteArchi3DModel.Store.sp_modelisateur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_modelisateur_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prénom" ColumnName="prénom" />
+                <ScalarProperty Name="qualité" ColumnName="qualité" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_promoteur" FunctionName="ProjetSiteArchi3DModel.Store.sp_promoteur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_promoteur_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prénom" ColumnName="prénom" />
+                <ScalarProperty Name="qualité" ColumnName="qualité" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

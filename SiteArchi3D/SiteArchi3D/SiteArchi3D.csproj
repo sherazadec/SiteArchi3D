@@ -263,6 +263,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteArchi3D.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sp_architecte_Result.cs">
+      <DependentUpon>SiteArchi3D.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_modelisateur_Result.cs">
+      <DependentUpon>SiteArchi3D.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_promoteur_Result.cs">
+      <DependentUpon>SiteArchi3D.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>SiteArchi3D.tt</DependentUpon>

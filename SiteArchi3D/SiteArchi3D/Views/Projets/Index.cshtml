@@ -14,88 +14,91 @@
 
 <h2 class="text-center" style="font-family:'PT Sans'">Projets</h2>
 
-<div class="row">
-	<div class="col-md-3 col-sm-3 col-xs-6">
-		<p>
-			<a href="@Url.Action("Create", "QuestionnaireProjets")" class="btn btn-sm animated-button victoria-one">Démarrer nouveau projet</a>
-		</p>
+<body style="background-color:darkgray">
+	<div class="row">
+		<div class="col-md-3 col-sm-3 col-xs-6">
+			<p>
+				<a href="@Url.Action("Create", "QuestionnaireProjets")" class="btn btn-sm animated-button victoria-one">Démarrer nouveau projet</a>
+			</p>
+		</div>
+		<div class="col-md-3 col-sm-3 col-xs-6">
+			<p>
+				<a href="@Url.Action("Index", "Liste_de_Prestataires")" class="btn btn-sm animated-button victoria-two">Mes Prestataires</a>
+			</p>
+		</div>
 	</div>
-	<div class="col-md-3 col-sm-3 col-xs-6">
-		<p>
-			<a href="@Url.Action("Index", "Liste_de_Prestataires")" class="btn btn-sm animated-button victoria-two">Mes Prestataires</a>
-		</p>
-	</div>
-</div>
 
 	@*<p>
-		@Html.ActionLink("Create Default", "Create")
-	</p>
+			@Html.ActionLink("Create Default", "Create")
+		</p>
 
-	<p>
-		@Html.ActionLink("Start a new project", "Create", "QuestionnaireProjets")
-	</p>
+		<p>
+			@Html.ActionLink("Start a new project", "Create", "QuestionnaireProjets")
+		</p>
 
-	<p>
-		@Html.ActionLink("Mes Prestataires", "Index", "Liste_de_Prestataires")
-	</p>*@
-<body>
-	<table id="projet" class="table" style="font-family:'PT Sans'">
-		<thead>
-			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.Promoteur)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Date_début)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Date_fin)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Avancement)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Commentaires.Commentaires1)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Liste_de_Prestataires.Prestataires)
-				</th>
-				<th></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			@foreach (var item in Model)
-			{
+		<p>
+			@Html.ActionLink("Mes Prestataires", "Index", "Liste_de_Prestataires")
+		</p>*@
+	<body>
+		<table id="projet" class="table" style="font-family:'PT Sans'">
+			<thead>
 				<tr>
-					<td>
-						@Html.DisplayFor(modelItem => item.Promoteur)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Date_début)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Date_fin)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Avancement)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Commentaires.Commentaires1)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Liste_de_Prestataires.Prestataires)
-					</td>
-					<td>
-						@Html.ActionLink("Edit", "Edit", new { id = item.idProjet }) |
-						@Html.ActionLink("Details", "Details", new { id = item.idProjet }) |
-						@Html.ActionLink("Delete", "Delete", new { id = item.idProjet })
-					</td>
+					<th>
+						@Html.DisplayNameFor(model => model.Promoteur)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Date_début)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Date_fin)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Avancement)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Commentaires.Commentaires1)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Liste_de_Prestataires.Prestataires)
+					</th>
+					<th></th>
 				</tr>
-			}
-		</tbody>
-	</table>
-</body>
+			</thead>
+
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Promoteur)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Date_début)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Date_fin)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Avancement)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Commentaires.Commentaires1)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Liste_de_Prestataires.Prestataires)
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.idProjet }) |
+							@Html.ActionLink("Details", "Details", new { id = item.idProjet }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.idProjet })
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		</body>
+		<footer style="background-color:aquamarine"></footer>
+	</body>
 	<script type="text/javascript">
 
 		$(document).ready(function () {
