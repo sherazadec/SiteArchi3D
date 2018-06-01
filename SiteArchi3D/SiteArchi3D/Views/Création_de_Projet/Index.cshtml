@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SiteArchi3D.Création_de_Projet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Démarrez un nouveau projet</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" style="font-family:'PT Sans'">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Questionnaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uploadfichiers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Liste_de_Prestataires.Prestataires)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Projet.Promoteur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Promoteur.idPromoteur)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Questionnaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uploadfichiers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Liste_de_Prestataires.Prestataires)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Projet.Promoteur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Promoteur.idPromoteur)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

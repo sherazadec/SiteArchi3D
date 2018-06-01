@@ -1,0 +1,42 @@
+﻿@model SiteArchi3D.Liste_de_Prestataires
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Liste_de_Prestataires</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Prestataires)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prestataires)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Architecte.idArchitecte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Architecte.idArchitecte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modélisateurs.idModélisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modélisateurs.idModélisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

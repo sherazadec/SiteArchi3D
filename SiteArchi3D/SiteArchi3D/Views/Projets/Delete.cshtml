@@ -1,0 +1,72 @@
+﻿@model SiteArchi3D.Projet
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Projet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Promoteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Promoteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_début)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_début)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avancement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avancement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commentaires.Commentaires1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commentaires.Commentaires1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Liste_de_Prestataires.Prestataires)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Liste_de_Prestataires.Prestataires)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

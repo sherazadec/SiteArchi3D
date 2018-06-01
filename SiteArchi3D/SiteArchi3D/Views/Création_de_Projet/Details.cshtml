@@ -1,0 +1,58 @@
+﻿@model SiteArchi3D.Création_de_Projet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Création_de_Projet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Questionnaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Questionnaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uploadfichiers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uploadfichiers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Liste_de_Prestataires.Prestataires)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Liste_de_Prestataires.Prestataires)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Projet.Promoteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Projet.Promoteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Promoteur.idPromoteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Promoteur.idPromoteur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,112 @@
+﻿@model SiteArchi3D.QuestionnaireProjet
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>QuestionnaireProjet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Création_de_Projet.Questionnaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Création_de_Projet.Questionnaire)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

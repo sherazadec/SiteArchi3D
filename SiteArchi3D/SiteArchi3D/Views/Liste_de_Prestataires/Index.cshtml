@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SiteArchi3D.Liste_de_Prestataires>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<h2 class="text-center" style="font-family:'PT Sans'">Votre liste de prestataires</h2>
+<p  style="font-family:'PT Sans'">Retrouvez ici les prestataires avec lesquels vous avez travaillé</p>
+<p> </p>
+<table id="prestataires" class="table" style="font-family:'PT Sans'">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Prestataires)
+			</th>
+			@*<th>
+					@Html.DisplayNameFor(model => model.Architecte.idArchitecte)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Modélisateurs.idModélisateur)
+				</th>*@
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Prestataires)
+				</td>
+				@*<td>
+						@Html.DisplayFor(modelItem => item.Architecte.idArchitecte)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Modélisateurs.idModélisateur)
+					</td>*@
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+					@Html.ActionLink("Details", "Details", new { id = item.id }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.id })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		$('#prestataires').DataTable();
+	});
+
+
+</script>
