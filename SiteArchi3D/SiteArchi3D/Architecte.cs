@@ -24,8 +24,8 @@ namespace SiteArchi3D
         public int Numéro_Architecte { get; set; }
         public int xid { get; set; }
     
-        public virtual Personnes Personnes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Liste_de_Prestataires> Liste_de_Prestataires { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

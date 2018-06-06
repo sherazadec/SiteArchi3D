@@ -12,10 +12,10 @@ namespace SiteArchi3D
     using System;
     using System.Collections.Generic;
     
-    public partial class Personnes
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Personnes()
+        public Account()
         {
             this.Architecte = new HashSet<Architecte>();
             this.Commentaires = new HashSet<Commentaires>();
@@ -26,16 +26,21 @@ namespace SiteArchi3D
         public int id { get; set; }
         public string Nom { get; set; }
         public string Prénom { get; set; }
-        public int Login { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string Société { get; set; }
+        public int N__TVA { get; set; }
         public int Qualité { get; set; }
     
+        public virtual Qualité Qualité1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Architecte> Architecte { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Commentaires> Commentaires { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Modélisateurs> Modélisateurs { get; set; }
-        public virtual Qualité Qualité1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promoteur> Promoteur { get; set; }
     }

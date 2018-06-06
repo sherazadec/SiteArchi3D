@@ -17,7 +17,7 @@ namespace SiteArchi3D.Controllers
         // GET: Promoteurs
         public ActionResult Index()
         {
-            var promoteur = db.Promoteur.Include(p => p.Personnes);
+            var promoteur = db.Promoteur.Include(p => p.Account);
             return View(promoteur.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace SiteArchi3D.Controllers
         // GET: Promoteurs/Create
         public ActionResult Create()
         {
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom");
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SiteArchi3D.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", promoteur.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", promoteur.xid);
             return View(promoteur);
         }
 
@@ -73,7 +73,7 @@ namespace SiteArchi3D.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", promoteur.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", promoteur.xid);
             return View(promoteur);
         }
 
@@ -90,7 +90,7 @@ namespace SiteArchi3D.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", promoteur.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", promoteur.xid);
             return View(promoteur);
         }
 

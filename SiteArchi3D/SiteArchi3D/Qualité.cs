@@ -17,13 +17,13 @@ namespace SiteArchi3D
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Qualité()
         {
-            this.Personnes = new HashSet<Personnes>();
+            this.Account = new HashSet<Account>();
         }
     
         public int id { get; set; }
         public string Qualité1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Personnes> Personnes { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
     }
 }

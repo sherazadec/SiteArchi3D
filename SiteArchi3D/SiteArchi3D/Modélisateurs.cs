@@ -25,6 +25,6 @@ namespace SiteArchi3D
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Liste_de_Prestataires> Liste_de_Prestataires { get; set; }
-        public virtual Personnes Personnes { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

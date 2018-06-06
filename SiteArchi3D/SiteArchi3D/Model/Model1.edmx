@@ -1,0 +1,1082 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjetSiteArchi3DModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Architecte">
+          <Key>
+            <PropertyRef Name="idArchitecte" />
+          </Key>
+          <Property Name="idArchitecte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numéro_Architecte" Type="int" Nullable="false" />
+          <Property Name="xid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="xidProjetFini" Type="int" Nullable="false" />
+          <Property Name="Fichiers" Type="binary" MaxLength="50" Nullable="false" />
+          <Property Name="Images" Type="image" Nullable="false" />
+          <Property Name="ListePrestatairesProjet" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Commentaires">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="xidPersonnes" Type="int" Nullable="false" />
+          <Property Name="Commentaires" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Création_de_Projet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="xidProjet" Type="int" Nullable="false" />
+          <Property Name="xidPromoteur" Type="int" Nullable="false" />
+          <Property Name="Prestataires" Type="int" Nullable="false" />
+          <Property Name="Questionnaire" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="uploadfichiers" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Liste_de_Prestataires">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prestataires" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="xidPrestas" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modélisateurs">
+          <Key>
+            <PropertyRef Name="idModélisateur" />
+          </Key>
+          <Property Name="idModélisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="xid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personnes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="int" Nullable="false" />
+          <Property Name="Qualité" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projet">
+          <Key>
+            <PropertyRef Name="idProjet" />
+          </Key>
+          <Property Name="idProjet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Promoteur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_début" Type="date" Nullable="false" />
+          <Property Name="Date_fin" Type="date" Nullable="false" />
+          <Property Name="Avancement" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Liste_prestataires" Type="int" Nullable="false" />
+          <Property Name="xidCommentaires" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promoteur">
+          <Key>
+            <PropertyRef Name="idPromoteur" />
+          </Key>
+          <Property Name="idPromoteur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="xid" Type="int" Nullable="false" />
+          <Property Name="admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Qualité">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Qualité" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionnaireProjet">
+          <Key>
+            <PropertyRef Name="idQuestionnaire" />
+          </Key>
+          <Property Name="idQuestionnaire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="xidCréaProjet" Type="int" Nullable="false" />
+          <Property Name="Question1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question3" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question4" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question5" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question6" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question7" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question8" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question9" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question10" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Signup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Architecte_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Architecte" Type="Self.Architecte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Architecte">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Archives_Archives">
+          <End Role="Projet" Type="Self.Projet" Multiplicity="1" />
+          <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="idProjet" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="xidProjetFini" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commentaires_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Commentaires" Type="Self.Commentaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Commentaires">
+              <PropertyRef Name="xidPersonnes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Création_de_Projet_Création_de_Projet">
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="1" />
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liste_de_Prestataires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Création_de_Projet">
+              <PropertyRef Name="Prestataires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Création_de_Projet_Projet">
+          <End Role="Projet" Type="Self.Projet" Multiplicity="1" />
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="idProjet" />
+            </Principal>
+            <Dependent Role="Création_de_Projet">
+              <PropertyRef Name="xidProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Création_de_Projet_Promoteur">
+          <End Role="Promoteur" Type="Self.Promoteur" Multiplicity="1" />
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promoteur">
+              <PropertyRef Name="idPromoteur" />
+            </Principal>
+            <Dependent Role="Création_de_Projet">
+              <PropertyRef Name="xidPromoteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListePrestataires_Architecte">
+          <End Role="Architecte" Type="Self.Architecte" Multiplicity="1" />
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Architecte">
+              <PropertyRef Name="idArchitecte" />
+            </Principal>
+            <Dependent Role="Liste_de_Prestataires">
+              <PropertyRef Name="xidPrestas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListePrestataires_Modélisateurs">
+          <End Role="Modélisateurs" Type="Self.Modélisateurs" Multiplicity="1" />
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modélisateurs">
+              <PropertyRef Name="idModélisateur" />
+            </Principal>
+            <Dependent Role="Liste_de_Prestataires">
+              <PropertyRef Name="xidPrestas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modélisateurs_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Modélisateurs" Type="Self.Modélisateurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Modélisateurs">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personnes_Qualité">
+          <End Role="Qualité" Type="Self.Qualité" Multiplicity="1" />
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualité">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Personnes">
+              <PropertyRef Name="Qualité" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projet_Commentaires">
+          <End Role="Commentaires" Type="Self.Commentaires" Multiplicity="1" />
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commentaires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Projet">
+              <PropertyRef Name="xidCommentaires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projet_ListePrestataires">
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="1" />
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liste_de_Prestataires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Projet">
+              <PropertyRef Name="Liste_prestataires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promoteur_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Promoteur" Type="Self.Promoteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Promoteur">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionnaireProjet_Création_de_Projet">
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="1" />
+          <End Role="QuestionnaireProjet" Type="Self.QuestionnaireProjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Création_de_Projet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionnaireProjet">
+              <PropertyRef Name="xidCréaProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_architecte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_modelisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_promoteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ProjetSiteArchi3DModelStoreContainer">
+          <EntitySet Name="Architecte" EntityType="Self.Architecte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commentaires" EntityType="Self.Commentaires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Création_de_Projet" EntityType="Self.Création_de_Projet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Liste_de_Prestataires" EntityType="Self.Liste_de_Prestataires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modélisateurs" EntityType="Self.Modélisateurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personnes" EntityType="Self.Personnes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projet" EntityType="Self.Projet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promoteur" EntityType="Self.Promoteur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qualité" EntityType="Self.Qualité" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionnaireProjet" EntityType="Self.QuestionnaireProjet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Signup" EntityType="Self.Signup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Architecte_Personnes" Association="Self.FK_Architecte_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Architecte" EntitySet="Architecte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Archives_Archives" Association="Self.FK_Archives_Archives">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commentaires_Personnes" Association="Self.FK_Commentaires_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Commentaires" EntitySet="Commentaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Création_de_Projet_Création_de_Projet" Association="Self.FK_Création_de_Projet_Création_de_Projet">
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Création_de_Projet_Projet" Association="Self.FK_Création_de_Projet_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Création_de_Projet_Promoteur" Association="Self.FK_Création_de_Projet_Promoteur">
+            <End Role="Promoteur" EntitySet="Promoteur" />
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListePrestataires_Architecte" Association="Self.FK_ListePrestataires_Architecte">
+            <End Role="Architecte" EntitySet="Architecte" />
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListePrestataires_Modélisateurs" Association="Self.FK_ListePrestataires_Modélisateurs">
+            <End Role="Modélisateurs" EntitySet="Modélisateurs" />
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modélisateurs_Personnes" Association="Self.FK_Modélisateurs_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Modélisateurs" EntitySet="Modélisateurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personnes_Qualité" Association="Self.FK_Personnes_Qualité">
+            <End Role="Qualité" EntitySet="Qualité" />
+            <End Role="Personnes" EntitySet="Personnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projet_Commentaires" Association="Self.FK_Projet_Commentaires">
+            <End Role="Commentaires" EntitySet="Commentaires" />
+            <End Role="Projet" EntitySet="Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projet_ListePrestataires" Association="Self.FK_Projet_ListePrestataires">
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+            <End Role="Projet" EntitySet="Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promoteur_Personnes" Association="Self.FK_Promoteur_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Promoteur" EntitySet="Promoteur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionnaireProjet_Création_de_Projet" Association="Self.FK_QuestionnaireProjet_Création_de_Projet">
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+            <End Role="QuestionnaireProjet" EntitySet="QuestionnaireProjet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjetSiteArchi3DModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Architecte">
+          <Key>
+            <PropertyRef Name="idArchitecte" />
+          </Key>
+          <Property Name="idArchitecte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numéro_Architecte" Type="Int32" Nullable="false" />
+          <Property Name="xid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Personnes" Relationship="Self.FK_Architecte_Personnes" FromRole="Architecte" ToRole="Personnes" />
+          <NavigationProperty Name="Liste_de_Prestataires" Relationship="Self.FK_ListePrestataires_Architecte" FromRole="Architecte" ToRole="Liste_de_Prestataires" />
+        </EntityType>
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="xidProjetFini" Type="Int32" Nullable="false" />
+          <Property Name="Fichiers" Type="Binary" MaxLength="50" FixedLength="true" Nullable="false" />
+          <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ListePrestatairesProjet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Projet" Relationship="Self.FK_Archives_Archives" FromRole="Archives" ToRole="Projet" />
+        </EntityType>
+        <EntityType Name="Commentaires">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="xidPersonnes" Type="Int32" Nullable="false" />
+          <Property Name="Commentaires1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Personnes" Relationship="Self.FK_Commentaires_Personnes" FromRole="Commentaires" ToRole="Personnes" />
+          <NavigationProperty Name="Projet" Relationship="Self.FK_Projet_Commentaires" FromRole="Commentaires" ToRole="Projet" />
+        </EntityType>
+        <EntityType Name="Création_de_Projet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="xidProjet" Type="Int32" Nullable="false" />
+          <Property Name="xidPromoteur" Type="Int32" Nullable="false" />
+          <Property Name="Prestataires" Type="Int32" Nullable="false" />
+          <Property Name="Questionnaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uploadfichiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Liste_de_Prestataires" Relationship="Self.FK_Création_de_Projet_Création_de_Projet" FromRole="Création_de_Projet" ToRole="Liste_de_Prestataires" />
+          <NavigationProperty Name="Projet" Relationship="Self.FK_Création_de_Projet_Projet" FromRole="Création_de_Projet" ToRole="Projet" />
+          <NavigationProperty Name="Promoteur" Relationship="Self.FK_Création_de_Projet_Promoteur" FromRole="Création_de_Projet" ToRole="Promoteur" />
+          <NavigationProperty Name="QuestionnaireProjet" Relationship="Self.FK_QuestionnaireProjet_Création_de_Projet" FromRole="Création_de_Projet" ToRole="QuestionnaireProjet" />
+        </EntityType>
+        <EntityType Name="Liste_de_Prestataires">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prestataires" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="xidPrestas" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Architecte" Relationship="Self.FK_ListePrestataires_Architecte" FromRole="Liste_de_Prestataires" ToRole="Architecte" />
+          <NavigationProperty Name="Création_de_Projet" Relationship="Self.FK_Création_de_Projet_Création_de_Projet" FromRole="Liste_de_Prestataires" ToRole="Création_de_Projet" />
+          <NavigationProperty Name="Modélisateurs" Relationship="Self.FK_ListePrestataires_Modélisateurs" FromRole="Liste_de_Prestataires" ToRole="Modélisateurs" />
+          <NavigationProperty Name="Projet" Relationship="Self.FK_Projet_ListePrestataires" FromRole="Liste_de_Prestataires" ToRole="Projet" />
+        </EntityType>
+        <EntityType Name="Modélisateurs">
+          <Key>
+            <PropertyRef Name="idModélisateur" />
+          </Key>
+          <Property Name="idModélisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="xid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Liste_de_Prestataires" Relationship="Self.FK_ListePrestataires_Modélisateurs" FromRole="Modélisateurs" ToRole="Liste_de_Prestataires" />
+          <NavigationProperty Name="Personnes" Relationship="Self.FK_Modélisateurs_Personnes" FromRole="Modélisateurs" ToRole="Personnes" />
+        </EntityType>
+        <EntityType Name="Personnes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prénom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="Int32" Nullable="false" />
+          <Property Name="Qualité" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Architecte" Relationship="Self.FK_Architecte_Personnes" FromRole="Personnes" ToRole="Architecte" />
+          <NavigationProperty Name="Commentaires" Relationship="Self.FK_Commentaires_Personnes" FromRole="Personnes" ToRole="Commentaires" />
+          <NavigationProperty Name="Modélisateurs" Relationship="Self.FK_Modélisateurs_Personnes" FromRole="Personnes" ToRole="Modélisateurs" />
+          <NavigationProperty Name="Qualité1" Relationship="Self.FK_Personnes_Qualité" FromRole="Personnes" ToRole="Qualité" />
+          <NavigationProperty Name="Promoteur" Relationship="Self.FK_Promoteur_Personnes" FromRole="Personnes" ToRole="Promoteur" />
+        </EntityType>
+        <EntityType Name="Projet">
+          <Key>
+            <PropertyRef Name="idProjet" />
+          </Key>
+          <Property Name="idProjet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Promoteur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_début" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Avancement" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Liste_prestataires" Type="Int32" Nullable="false" />
+          <Property Name="xidCommentaires" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Archives" Relationship="Self.FK_Archives_Archives" FromRole="Projet" ToRole="Archives" />
+          <NavigationProperty Name="Commentaires" Relationship="Self.FK_Projet_Commentaires" FromRole="Projet" ToRole="Commentaires" />
+          <NavigationProperty Name="Création_de_Projet" Relationship="Self.FK_Création_de_Projet_Projet" FromRole="Projet" ToRole="Création_de_Projet" />
+          <NavigationProperty Name="Liste_de_Prestataires" Relationship="Self.FK_Projet_ListePrestataires" FromRole="Projet" ToRole="Liste_de_Prestataires" />
+        </EntityType>
+        <EntityType Name="Promoteur">
+          <Key>
+            <PropertyRef Name="idPromoteur" />
+          </Key>
+          <Property Name="idPromoteur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="xid" Type="Int32" Nullable="false" />
+          <Property Name="admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Création_de_Projet" Relationship="Self.FK_Création_de_Projet_Promoteur" FromRole="Promoteur" ToRole="Création_de_Projet" />
+          <NavigationProperty Name="Personnes" Relationship="Self.FK_Promoteur_Personnes" FromRole="Promoteur" ToRole="Personnes" />
+        </EntityType>
+        <EntityType Name="Qualité">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Qualité1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Personnes" Relationship="Self.FK_Personnes_Qualité" FromRole="Qualité" ToRole="Personnes" />
+        </EntityType>
+        <EntityType Name="QuestionnaireProjet">
+          <Key>
+            <PropertyRef Name="idQuestionnaire" />
+          </Key>
+          <Property Name="idQuestionnaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="xidCréaProjet" Type="Int32" Nullable="false" />
+          <Property Name="Question1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question8" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question9" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question10" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Création_de_Projet" Relationship="Self.FK_QuestionnaireProjet_Création_de_Projet" FromRole="QuestionnaireProjet" ToRole="Création_de_Projet" />
+        </EntityType>
+        <EntityType Name="Signup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Architecte_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Architecte" Type="Self.Architecte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Architecte">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListePrestataires_Architecte">
+          <End Role="Architecte" Type="Self.Architecte" Multiplicity="1" />
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Architecte">
+              <PropertyRef Name="idArchitecte" />
+            </Principal>
+            <Dependent Role="Liste_de_Prestataires">
+              <PropertyRef Name="xidPrestas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Archives_Archives">
+          <End Role="Projet" Type="Self.Projet" Multiplicity="1" />
+          <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="idProjet" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="xidProjetFini" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commentaires_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Commentaires" Type="Self.Commentaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Commentaires">
+              <PropertyRef Name="xidPersonnes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projet_Commentaires">
+          <End Role="Commentaires" Type="Self.Commentaires" Multiplicity="1" />
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commentaires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Projet">
+              <PropertyRef Name="xidCommentaires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Création_de_Projet_Création_de_Projet">
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="1" />
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liste_de_Prestataires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Création_de_Projet">
+              <PropertyRef Name="Prestataires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Création_de_Projet_Projet">
+          <End Role="Projet" Type="Self.Projet" Multiplicity="1" />
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="idProjet" />
+            </Principal>
+            <Dependent Role="Création_de_Projet">
+              <PropertyRef Name="xidProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Création_de_Projet_Promoteur">
+          <End Role="Promoteur" Type="Self.Promoteur" Multiplicity="1" />
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promoteur">
+              <PropertyRef Name="idPromoteur" />
+            </Principal>
+            <Dependent Role="Création_de_Projet">
+              <PropertyRef Name="xidPromoteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionnaireProjet_Création_de_Projet">
+          <End Role="Création_de_Projet" Type="Self.Création_de_Projet" Multiplicity="1" />
+          <End Role="QuestionnaireProjet" Type="Self.QuestionnaireProjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Création_de_Projet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionnaireProjet">
+              <PropertyRef Name="xidCréaProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListePrestataires_Modélisateurs">
+          <End Role="Modélisateurs" Type="Self.Modélisateurs" Multiplicity="1" />
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modélisateurs">
+              <PropertyRef Name="idModélisateur" />
+            </Principal>
+            <Dependent Role="Liste_de_Prestataires">
+              <PropertyRef Name="xidPrestas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projet_ListePrestataires">
+          <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="1" />
+          <End Role="Projet" Type="Self.Projet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liste_de_Prestataires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Projet">
+              <PropertyRef Name="Liste_prestataires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modélisateurs_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Modélisateurs" Type="Self.Modélisateurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Modélisateurs">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personnes_Qualité">
+          <End Role="Qualité" Type="Self.Qualité" Multiplicity="1" />
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualité">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Personnes">
+              <PropertyRef Name="Qualité" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promoteur_Personnes">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="Promoteur" Type="Self.Promoteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Promoteur">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjetSiteArchi3DEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Architecte" EntityType="Self.Architecte" />
+          <EntitySet Name="Archives" EntityType="Self.Archives" />
+          <EntitySet Name="Commentaires" EntityType="Self.Commentaires" />
+          <EntitySet Name="Création_de_Projet" EntityType="Self.Création_de_Projet" />
+          <EntitySet Name="Liste_de_Prestataires" EntityType="Self.Liste_de_Prestataires" />
+          <EntitySet Name="Modélisateurs" EntityType="Self.Modélisateurs" />
+          <EntitySet Name="Personnes" EntityType="Self.Personnes" />
+          <EntitySet Name="Projet" EntityType="Self.Projet" />
+          <EntitySet Name="Promoteur" EntityType="Self.Promoteur" />
+          <EntitySet Name="Qualité" EntityType="Self.Qualité" />
+          <EntitySet Name="QuestionnaireProjet" EntityType="Self.QuestionnaireProjet" />
+          <EntitySet Name="Signup" EntityType="Self.Signup" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Architecte_Personnes" Association="Self.FK_Architecte_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Architecte" EntitySet="Architecte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListePrestataires_Architecte" Association="Self.FK_ListePrestataires_Architecte">
+            <End Role="Architecte" EntitySet="Architecte" />
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Archives_Archives" Association="Self.FK_Archives_Archives">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commentaires_Personnes" Association="Self.FK_Commentaires_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Commentaires" EntitySet="Commentaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projet_Commentaires" Association="Self.FK_Projet_Commentaires">
+            <End Role="Commentaires" EntitySet="Commentaires" />
+            <End Role="Projet" EntitySet="Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Création_de_Projet_Création_de_Projet" Association="Self.FK_Création_de_Projet_Création_de_Projet">
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Création_de_Projet_Projet" Association="Self.FK_Création_de_Projet_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Création_de_Projet_Promoteur" Association="Self.FK_Création_de_Projet_Promoteur">
+            <End Role="Promoteur" EntitySet="Promoteur" />
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionnaireProjet_Création_de_Projet" Association="Self.FK_QuestionnaireProjet_Création_de_Projet">
+            <End Role="Création_de_Projet" EntitySet="Création_de_Projet" />
+            <End Role="QuestionnaireProjet" EntitySet="QuestionnaireProjet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListePrestataires_Modélisateurs" Association="Self.FK_ListePrestataires_Modélisateurs">
+            <End Role="Modélisateurs" EntitySet="Modélisateurs" />
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projet_ListePrestataires" Association="Self.FK_Projet_ListePrestataires">
+            <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
+            <End Role="Projet" EntitySet="Projet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modélisateurs_Personnes" Association="Self.FK_Modélisateurs_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Modélisateurs" EntitySet="Modélisateurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personnes_Qualité" Association="Self.FK_Personnes_Qualité">
+            <End Role="Qualité" EntitySet="Qualité" />
+            <End Role="Personnes" EntitySet="Personnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promoteur_Personnes" Association="Self.FK_Promoteur_Personnes">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Promoteur" EntitySet="Promoteur" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_architecte" ReturnType="Collection(ProjetSiteArchi3DModel.sp_architecte_Result)" />
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ProjetSiteArchi3DModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ProjetSiteArchi3DModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_modelisateur" ReturnType="Collection(ProjetSiteArchi3DModel.sp_modelisateur_Result)" />
+          <FunctionImport Name="sp_promoteur" ReturnType="Collection(ProjetSiteArchi3DModel.sp_promoteur_Result)" />
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_architecte_Result">
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="qualité" Nullable="false" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_modelisateur_Result">
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="qualité" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_promoteur_Result">
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="qualité" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjetSiteArchi3DModelStoreContainer" CdmEntityContainer="ProjetSiteArchi3DEntities2">
+          <EntitySetMapping Name="Architecte">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Architecte">
+              <MappingFragment StoreEntitySet="Architecte">
+                <ScalarProperty Name="idArchitecte" ColumnName="idArchitecte" />
+                <ScalarProperty Name="Numéro_Architecte" ColumnName="Numéro_Architecte" />
+                <ScalarProperty Name="xid" ColumnName="xid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Archives">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Archives">
+              <MappingFragment StoreEntitySet="Archives">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="xidProjetFini" ColumnName="xidProjetFini" />
+                <ScalarProperty Name="Fichiers" ColumnName="Fichiers" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="ListePrestatairesProjet" ColumnName="ListePrestatairesProjet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commentaires">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Commentaires">
+              <MappingFragment StoreEntitySet="Commentaires">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="xidPersonnes" ColumnName="xidPersonnes" />
+                <ScalarProperty Name="Commentaires1" ColumnName="Commentaires" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Création_de_Projet">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Création_de_Projet">
+              <MappingFragment StoreEntitySet="Création_de_Projet">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="xidProjet" ColumnName="xidProjet" />
+                <ScalarProperty Name="xidPromoteur" ColumnName="xidPromoteur" />
+                <ScalarProperty Name="Prestataires" ColumnName="Prestataires" />
+                <ScalarProperty Name="Questionnaire" ColumnName="Questionnaire" />
+                <ScalarProperty Name="uploadfichiers" ColumnName="uploadfichiers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Liste_de_Prestataires">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Liste_de_Prestataires">
+              <MappingFragment StoreEntitySet="Liste_de_Prestataires">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Prestataires" ColumnName="Prestataires" />
+                <ScalarProperty Name="xidPrestas" ColumnName="xidPrestas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modélisateurs">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Modélisateurs">
+              <MappingFragment StoreEntitySet="Modélisateurs">
+                <ScalarProperty Name="idModélisateur" ColumnName="idModélisateur" />
+                <ScalarProperty Name="xid" ColumnName="xid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnes">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Personnes">
+              <MappingFragment StoreEntitySet="Personnes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Qualité" ColumnName="Qualité" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projet">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Projet">
+              <MappingFragment StoreEntitySet="Projet">
+                <ScalarProperty Name="idProjet" ColumnName="idProjet" />
+                <ScalarProperty Name="Promoteur" ColumnName="Promoteur" />
+                <ScalarProperty Name="Date_début" ColumnName="Date_début" />
+                <ScalarProperty Name="Date_fin" ColumnName="Date_fin" />
+                <ScalarProperty Name="Avancement" ColumnName="Avancement" />
+                <ScalarProperty Name="Liste_prestataires" ColumnName="Liste_prestataires" />
+                <ScalarProperty Name="xidCommentaires" ColumnName="xidCommentaires" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promoteur">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Promoteur">
+              <MappingFragment StoreEntitySet="Promoteur">
+                <ScalarProperty Name="idPromoteur" ColumnName="idPromoteur" />
+                <ScalarProperty Name="xid" ColumnName="xid" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualité">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Qualité">
+              <MappingFragment StoreEntitySet="Qualité">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Qualité1" ColumnName="Qualité" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionnaireProjet">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.QuestionnaireProjet">
+              <MappingFragment StoreEntitySet="QuestionnaireProjet">
+                <ScalarProperty Name="idQuestionnaire" ColumnName="idQuestionnaire" />
+                <ScalarProperty Name="xidCréaProjet" ColumnName="xidCréaProjet" />
+                <ScalarProperty Name="Question1" ColumnName="Question1" />
+                <ScalarProperty Name="Question2" ColumnName="Question2" />
+                <ScalarProperty Name="Question3" ColumnName="Question3" />
+                <ScalarProperty Name="Question4" ColumnName="Question4" />
+                <ScalarProperty Name="Question5" ColumnName="Question5" />
+                <ScalarProperty Name="Question6" ColumnName="Question6" />
+                <ScalarProperty Name="Question7" ColumnName="Question7" />
+                <ScalarProperty Name="Question8" ColumnName="Question8" />
+                <ScalarProperty Name="Question9" ColumnName="Question9" />
+                <ScalarProperty Name="Question10" ColumnName="Question10" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Signup">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Signup">
+              <MappingFragment StoreEntitySet="Signup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ProjetSiteArchi3DModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_architecte" FunctionName="ProjetSiteArchi3DModel.Store.sp_architecte">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_architecte_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prénom" ColumnName="prénom" />
+                <ScalarProperty Name="qualité" ColumnName="qualité" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ProjetSiteArchi3DModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ProjetSiteArchi3DModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ProjetSiteArchi3DModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ProjetSiteArchi3DModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_modelisateur" FunctionName="ProjetSiteArchi3DModel.Store.sp_modelisateur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_modelisateur_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prénom" ColumnName="prénom" />
+                <ScalarProperty Name="qualité" ColumnName="qualité" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_promoteur" FunctionName="ProjetSiteArchi3DModel.Store.sp_promoteur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetSiteArchi3DModel.sp_promoteur_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prénom" ColumnName="prénom" />
+                <ScalarProperty Name="qualité" ColumnName="qualité" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ProjetSiteArchi3DModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProjetSiteArchi3DModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

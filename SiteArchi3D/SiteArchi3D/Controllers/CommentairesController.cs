@@ -17,7 +17,7 @@ namespace SiteArchi3D.Controllers
         // GET: Commentaires
         public ActionResult Index()
         {
-            var commentaires = db.Commentaires.Include(c => c.Personnes);
+            var commentaires = db.Commentaires.Include(c => c.Account);
             return View(commentaires.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace SiteArchi3D.Controllers
         // GET: Commentaires/Create
         public ActionResult Create()
         {
-            ViewBag.xidPersonnes = new SelectList(db.Personnes, "id", "Nom");
+            ViewBag.xidPersonnes = new SelectList(db.Account, "id", "Nom");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SiteArchi3D.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.xidPersonnes = new SelectList(db.Personnes, "id", "Nom", commentaires.xidPersonnes);
+            ViewBag.xidPersonnes = new SelectList(db.Account, "id", "Nom", commentaires.xidPersonnes);
             return View(commentaires);
         }
 
@@ -73,7 +73,7 @@ namespace SiteArchi3D.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.xidPersonnes = new SelectList(db.Personnes, "id", "Nom", commentaires.xidPersonnes);
+            ViewBag.xidPersonnes = new SelectList(db.Account, "id", "Nom", commentaires.xidPersonnes);
             return View(commentaires);
         }
 
@@ -90,7 +90,7 @@ namespace SiteArchi3D.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.xidPersonnes = new SelectList(db.Personnes, "id", "Nom", commentaires.xidPersonnes);
+            ViewBag.xidPersonnes = new SelectList(db.Account, "id", "Nom", commentaires.xidPersonnes);
             return View(commentaires);
         }
 

@@ -17,7 +17,7 @@ namespace SiteArchi3D.Controllers
         // GET: Architectes
         public ActionResult Index()
         {
-            var architecte = db.Architecte.Include(a => a.Personnes);
+            var architecte = db.Architecte.Include(a => a.Account);
             return View(architecte.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace SiteArchi3D.Controllers
         // GET: Architectes/Create
         public ActionResult Create()
         {
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom");
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SiteArchi3D.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", architecte.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", architecte.xid);
             return View(architecte);
         }
 
@@ -73,7 +73,7 @@ namespace SiteArchi3D.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", architecte.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", architecte.xid);
             return View(architecte);
         }
 
@@ -90,7 +90,7 @@ namespace SiteArchi3D.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", architecte.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", architecte.xid);
             return View(architecte);
         }
 

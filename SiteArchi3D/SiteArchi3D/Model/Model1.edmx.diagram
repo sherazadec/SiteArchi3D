@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="484f2a2bdcec495b9a1840b822d9408b" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Architecte" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Archives" Width="1.5" PointX="12" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Commentaires" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Création_de_Projet" Width="1.5" PointX="9.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Liste_de_Prestataires" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Modélisateurs" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Personnes" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Projet" Width="1.5" PointX="9.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Promoteur" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Qualité" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.QuestionnaireProjet" Width="1.5" PointX="12" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.Signup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetSiteArchi3DModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Architecte_Personnes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_ListePrestataires_Architecte" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Archives_Archives" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Commentaires_Personnes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Projet_Commentaires" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Création_de_Projet_Création_de_Projet" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Création_de_Projet_Projet" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Création_de_Projet_Promoteur" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_QuestionnaireProjet_Création_de_Projet" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_ListePrestataires_Modélisateurs" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Projet_ListePrestataires" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Modélisateurs_Personnes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Personnes_Qualité" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetSiteArchi3DModel.FK_Promoteur_Personnes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

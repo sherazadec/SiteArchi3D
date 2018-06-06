@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SiteArchi3D.Personnes>
+﻿@model IEnumerable<SiteArchi3D.Account>
 
 @{
     ViewBag.Title = "Index";
@@ -18,7 +18,22 @@
             @Html.DisplayNameFor(model => model.Prénom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Login)
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConfirmPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Société)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.N__TVA)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Qualité1.Qualité1)
@@ -35,7 +50,22 @@
             @Html.DisplayFor(modelItem => item.Prénom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Login)
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConfirmPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Société)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.N__TVA)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Qualité1.Qualité1)

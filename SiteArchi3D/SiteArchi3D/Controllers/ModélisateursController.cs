@@ -17,7 +17,7 @@ namespace SiteArchi3D.Controllers
         // GET: Modélisateurs
         public ActionResult Index()
         {
-            var modélisateurs = db.Modélisateurs.Include(m => m.Personnes);
+            var modélisateurs = db.Modélisateurs.Include(m => m.Account);
             return View(modélisateurs.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace SiteArchi3D.Controllers
         // GET: Modélisateurs/Create
         public ActionResult Create()
         {
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom");
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SiteArchi3D.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", modélisateurs.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", modélisateurs.xid);
             return View(modélisateurs);
         }
 
@@ -73,7 +73,7 @@ namespace SiteArchi3D.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", modélisateurs.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", modélisateurs.xid);
             return View(modélisateurs);
         }
 
@@ -90,7 +90,7 @@ namespace SiteArchi3D.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.xid = new SelectList(db.Personnes, "id", "Nom", modélisateurs.xid);
+            ViewBag.xid = new SelectList(db.Account, "id", "Nom", modélisateurs.xid);
             return View(modélisateurs);
         }
 

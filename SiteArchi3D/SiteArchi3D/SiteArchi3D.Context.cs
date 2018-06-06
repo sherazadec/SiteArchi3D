@@ -32,7 +32,6 @@ namespace SiteArchi3D
         public virtual DbSet<Commentaires> Commentaires { get; set; }
         public virtual DbSet<Liste_de_Prestataires> Liste_de_Prestataires { get; set; }
         public virtual DbSet<Modélisateurs> Modélisateurs { get; set; }
-        public virtual DbSet<Personnes> Personnes { get; set; }
         public virtual DbSet<Promoteur> Promoteur { get; set; }
         public virtual DbSet<Qualité> Qualité { get; set; }
         public virtual DbSet<QuestionnaireProjet> QuestionnaireProjet { get; set; }
@@ -40,6 +39,7 @@ namespace SiteArchi3D
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Création_de_Projet> Création_de_Projet { get; set; }
         public virtual DbSet<Projet> Projet { get; set; }
+        public virtual DbSet<Account> Account { get; set; }
     
         public virtual ObjectResult<sp_architecte_Result> sp_architecte()
         {

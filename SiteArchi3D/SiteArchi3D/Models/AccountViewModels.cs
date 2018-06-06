@@ -64,6 +64,19 @@ namespace SiteArchi3D.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name ="Nom")]
+        public string Nom { get; set; }
+
+        [Required]
+        [Display(Name = "Prénom")]
+        public string Prénom { get; set; }
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +92,18 @@ namespace SiteArchi3D.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name ="Société")]
+        public string Société { get; set; }
+
+        [Required]
+        [Display(Name ="N° TVA")]
+        public int N_TVA { get; set; }
+
+        [Required]
+        [Display(Name = "Qualité")]
+        public int Qualité { get; set; }
     }
 
     public class ResetPasswordViewModel

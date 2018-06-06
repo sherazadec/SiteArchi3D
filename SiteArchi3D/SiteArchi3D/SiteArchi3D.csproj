@@ -186,6 +186,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>SiteArchi3D.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -201,6 +204,7 @@
       <DependentUpon>SiteArchi3D.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ArchitectesController.cs" />
     <Compile Include="Controllers\ArchivesController.cs" />
     <Compile Include="Controllers\CommentairesController.cs" />
@@ -209,7 +213,6 @@
     <Compile Include="Controllers\Liste_de_PrestatairesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModélisateursController.cs" />
-    <Compile Include="Controllers\PersonnesController.cs" />
     <Compile Include="Controllers\ProjetsController.cs" />
     <Compile Include="Controllers\PromoteursController.cs" />
     <Compile Include="Controllers\QualitéController.cs" />
@@ -227,9 +230,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Modélisateurs.cs">
-      <DependentUpon>SiteArchi3D.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Personnes.cs">
       <DependentUpon>SiteArchi3D.tt</DependentUpon>
     </Compile>
     <Compile Include="Projet.cs">
@@ -356,41 +356,16 @@
     <Content Include="Views\Archives\Details.cshtml" />
     <Content Include="Views\Archives\Edit.cshtml" />
     <Content Include="Views\Archives\Index.cshtml" />
-    <Content Include="Views\Commentaires\Create.cshtml" />
-    <Content Include="Views\Commentaires\Delete.cshtml" />
-    <Content Include="Views\Commentaires\Details.cshtml" />
-    <Content Include="Views\Commentaires\Edit.cshtml" />
-    <Content Include="Views\Commentaires\Index.cshtml" />
     <Content Include="Views\Liste_de_Prestataires\Create.cshtml" />
     <Content Include="Views\Liste_de_Prestataires\Delete.cshtml" />
     <Content Include="Views\Liste_de_Prestataires\Details.cshtml" />
     <Content Include="Views\Liste_de_Prestataires\Edit.cshtml" />
     <Content Include="Views\Liste_de_Prestataires\Index.cshtml" />
-    <Content Include="Views\Personnes\Create.cshtml" />
-    <Content Include="Views\Personnes\Delete.cshtml" />
-    <Content Include="Views\Personnes\Details.cshtml" />
-    <Content Include="Views\Personnes\Edit.cshtml" />
-    <Content Include="Views\Personnes\Index.cshtml" />
     <Content Include="Views\QuestionnaireProjets\Create.cshtml" />
     <Content Include="Views\QuestionnaireProjets\Delete.cshtml" />
     <Content Include="Views\QuestionnaireProjets\Details.cshtml" />
     <Content Include="Views\QuestionnaireProjets\Edit.cshtml" />
     <Content Include="Views\QuestionnaireProjets\Index.cshtml" />
-    <Content Include="Views\Architectes\Create.cshtml" />
-    <Content Include="Views\Architectes\Delete.cshtml" />
-    <Content Include="Views\Architectes\Details.cshtml" />
-    <Content Include="Views\Architectes\Edit.cshtml" />
-    <Content Include="Views\Architectes\Index.cshtml" />
-    <Content Include="Views\Modélisateurs\Create.cshtml" />
-    <Content Include="Views\Modélisateurs\Delete.cshtml" />
-    <Content Include="Views\Modélisateurs\Details.cshtml" />
-    <Content Include="Views\Modélisateurs\Edit.cshtml" />
-    <Content Include="Views\Modélisateurs\Index.cshtml" />
-    <Content Include="Views\Promoteurs\Create.cshtml" />
-    <Content Include="Views\Promoteurs\Delete.cshtml" />
-    <Content Include="Views\Promoteurs\Details.cshtml" />
-    <Content Include="Views\Promoteurs\Edit.cshtml" />
-    <Content Include="Views\Promoteurs\Index.cshtml" />
     <Content Include="Views\Qualité\Create.cshtml" />
     <Content Include="Views\Qualité\Delete.cshtml" />
     <Content Include="Views\Qualité\Details.cshtml" />
@@ -406,6 +381,31 @@
     <Content Include="Views\Création_de_Projet\Details.cshtml" />
     <Content Include="Views\Création_de_Projet\Edit.cshtml" />
     <Content Include="Views\Création_de_Projet\Index.cshtml" />
+    <Content Include="Views\Architectes\Create.cshtml" />
+    <Content Include="Views\Architectes\Delete.cshtml" />
+    <Content Include="Views\Architectes\Details.cshtml" />
+    <Content Include="Views\Architectes\Edit.cshtml" />
+    <Content Include="Views\Architectes\Index.cshtml" />
+    <Content Include="Views\Commentaires\Create.cshtml" />
+    <Content Include="Views\Commentaires\Delete.cshtml" />
+    <Content Include="Views\Commentaires\Details.cshtml" />
+    <Content Include="Views\Commentaires\Edit.cshtml" />
+    <Content Include="Views\Commentaires\Index.cshtml" />
+    <Content Include="Views\Promoteurs\Create.cshtml" />
+    <Content Include="Views\Promoteurs\Delete.cshtml" />
+    <Content Include="Views\Promoteurs\Details.cshtml" />
+    <Content Include="Views\Promoteurs\Edit.cshtml" />
+    <Content Include="Views\Promoteurs\Index.cshtml" />
+    <Content Include="Views\Modélisateurs\Create.cshtml" />
+    <Content Include="Views\Modélisateurs\Delete.cshtml" />
+    <Content Include="Views\Modélisateurs\Details.cshtml" />
+    <Content Include="Views\Modélisateurs\Edit.cshtml" />
+    <Content Include="Views\Modélisateurs\Index.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Edit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

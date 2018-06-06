@@ -17,6 +17,7 @@ namespace SiteArchi3D.Controllers
         // GET: Liste_de_Prestataires
         public ActionResult Index()
         {
+
             var liste_de_Prestataires = db.Liste_de_Prestataires.Include(l => l.Architecte).Include(l => l.Modélisateurs);
             return View(liste_de_Prestataires.ToList());
         }

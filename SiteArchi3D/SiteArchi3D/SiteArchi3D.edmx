@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ProjetSiteArchi3DModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Société" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="N° TVA" Type="int" Nullable="false" />
+          <Property Name="Qualité" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Architecte">
           <Key>
             <PropertyRef Name="idArchitecte" />
@@ -56,16 +71,6 @@
           </Key>
           <Property Name="idModélisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="xid" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Personnes">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Prénom" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Login" Type="int" Nullable="false" />
-          <Property Name="Qualité" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Projet">
           <Key>
@@ -130,11 +135,23 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Architecte_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+        <Association Name="FK_Account_Qualité">
+          <End Role="Qualité" Type="Self.Qualité" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualité">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Qualité" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Architecte_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Architecte" Type="Self.Architecte" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personnes">
+            <Principal Role="Account">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Architecte">
@@ -154,11 +171,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Commentaires_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+        <Association Name="FK_Commentaires_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Commentaires" Type="Self.Commentaires" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personnes">
+            <Principal Role="Account">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Commentaires">
@@ -226,27 +243,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Modélisateurs_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+        <Association Name="FK_Modélisateurs_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Modélisateurs" Type="Self.Modélisateurs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personnes">
+            <Principal Role="Account">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Modélisateurs">
               <PropertyRef Name="xid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Personnes_Qualité">
-          <End Role="Qualité" Type="Self.Qualité" Multiplicity="1" />
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Qualité">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Personnes">
-              <PropertyRef Name="Qualité" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -274,11 +279,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Promoteur_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+        <Association Name="FK_Promoteur_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Promoteur" Type="Self.Promoteur" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Personnes">
+            <Principal Role="Account">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Promoteur">
@@ -302,29 +307,33 @@
         <Function Name="sp_modelisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_promoteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ProjetSiteArchi3DModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Architecte" EntityType="Self.Architecte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commentaires" EntityType="Self.Commentaires" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Création_de_Projet" EntityType="Self.Création_de_Projet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liste_de_Prestataires" EntityType="Self.Liste_de_Prestataires" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modélisateurs" EntityType="Self.Modélisateurs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Personnes" EntityType="Self.Personnes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projet" EntityType="Self.Projet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promoteur" EntityType="Self.Promoteur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qualité" EntityType="Self.Qualité" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionnaireProjet" EntityType="Self.QuestionnaireProjet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Signup" EntityType="Self.Signup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Architecte_Personnes" Association="Self.FK_Architecte_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
+          <AssociationSet Name="FK_Account_Qualité" Association="Self.FK_Account_Qualité">
+            <End Role="Qualité" EntitySet="Qualité" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Architecte_Account" Association="Self.FK_Architecte_Account">
+            <End Role="Account" EntitySet="Account" />
             <End Role="Architecte" EntitySet="Architecte" />
           </AssociationSet>
           <AssociationSet Name="FK_Archives_Archives" Association="Self.FK_Archives_Archives">
             <End Role="Projet" EntitySet="Projet" />
             <End Role="Archives" EntitySet="Archives" />
           </AssociationSet>
-          <AssociationSet Name="FK_Commentaires_Personnes" Association="Self.FK_Commentaires_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
+          <AssociationSet Name="FK_Commentaires_Account" Association="Self.FK_Commentaires_Account">
+            <End Role="Account" EntitySet="Account" />
             <End Role="Commentaires" EntitySet="Commentaires" />
           </AssociationSet>
           <AssociationSet Name="FK_Création_de_Projet_Création_de_Projet" Association="Self.FK_Création_de_Projet_Création_de_Projet">
@@ -347,13 +356,9 @@
             <End Role="Modélisateurs" EntitySet="Modélisateurs" />
             <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
           </AssociationSet>
-          <AssociationSet Name="FK_Modélisateurs_Personnes" Association="Self.FK_Modélisateurs_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
+          <AssociationSet Name="FK_Modélisateurs_Account" Association="Self.FK_Modélisateurs_Account">
+            <End Role="Account" EntitySet="Account" />
             <End Role="Modélisateurs" EntitySet="Modélisateurs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Personnes_Qualité" Association="Self.FK_Personnes_Qualité">
-            <End Role="Qualité" EntitySet="Qualité" />
-            <End Role="Personnes" EntitySet="Personnes" />
           </AssociationSet>
           <AssociationSet Name="FK_Projet_Commentaires" Association="Self.FK_Projet_Commentaires">
             <End Role="Commentaires" EntitySet="Commentaires" />
@@ -363,8 +368,8 @@
             <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
             <End Role="Projet" EntitySet="Projet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Promoteur_Personnes" Association="Self.FK_Promoteur_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
+          <AssociationSet Name="FK_Promoteur_Account" Association="Self.FK_Promoteur_Account">
+            <End Role="Account" EntitySet="Account" />
             <End Role="Promoteur" EntitySet="Promoteur" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionnaireProjet_Création_de_Projet" Association="Self.FK_QuestionnaireProjet_Création_de_Projet">
@@ -383,8 +388,8 @@
           <Property Name="idArchitecte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Numéro_Architecte" Type="Int32" Nullable="false" />
           <Property Name="xid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Personnes" Relationship="Self.FK_Architecte_Personnes" FromRole="Architecte" ToRole="Personnes" />
           <NavigationProperty Name="Liste_de_Prestataires" Relationship="Self.FK_ListePrestataires_Architecte" FromRole="Architecte" ToRole="Liste_de_Prestataires" />
+          <NavigationProperty Name="Account" Relationship="ProjetSiteArchi3DModel.FK_Architecte_Account" FromRole="Architecte" ToRole="Account" />
         </EntityType>
         <EntityType Name="Archives">
           <Key>
@@ -404,8 +409,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="xidPersonnes" Type="Int32" Nullable="false" />
           <Property Name="Commentaires1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Personnes" Relationship="Self.FK_Commentaires_Personnes" FromRole="Commentaires" ToRole="Personnes" />
           <NavigationProperty Name="Projet" Relationship="ProjetSiteArchi3DModel.FK_Projet_Commentaires" FromRole="Commentaires" ToRole="Projet" />
+          <NavigationProperty Name="Account" Relationship="ProjetSiteArchi3DModel.FK_Commentaires_Account" FromRole="Commentaires" ToRole="Account" />
         </EntityType>
         <EntityType Name="Liste_de_Prestataires">
           <Key>
@@ -426,22 +431,7 @@
           <Property Name="idModélisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="xid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Liste_de_Prestataires" Relationship="Self.FK_ListePrestataires_Modélisateurs" FromRole="Modélisateurs" ToRole="Liste_de_Prestataires" />
-          <NavigationProperty Name="Personnes" Relationship="Self.FK_Modélisateurs_Personnes" FromRole="Modélisateurs" ToRole="Personnes" />
-        </EntityType>
-        <EntityType Name="Personnes">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Prénom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Login" Type="Int32" Nullable="false" />
-          <Property Name="Qualité" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Architecte" Relationship="Self.FK_Architecte_Personnes" FromRole="Personnes" ToRole="Architecte" />
-          <NavigationProperty Name="Commentaires" Relationship="Self.FK_Commentaires_Personnes" FromRole="Personnes" ToRole="Commentaires" />
-          <NavigationProperty Name="Modélisateurs" Relationship="Self.FK_Modélisateurs_Personnes" FromRole="Personnes" ToRole="Modélisateurs" />
-          <NavigationProperty Name="Qualité1" Relationship="Self.FK_Personnes_Qualité" FromRole="Personnes" ToRole="Qualité" />
-          <NavigationProperty Name="Promoteur" Relationship="Self.FK_Promoteur_Personnes" FromRole="Personnes" ToRole="Promoteur" />
+          <NavigationProperty Name="Account" Relationship="ProjetSiteArchi3DModel.FK_Modélisateurs_Account" FromRole="Modélisateurs" ToRole="Account" />
         </EntityType>
         <EntityType Name="Promoteur">
           <Key>
@@ -450,8 +440,8 @@
           <Property Name="idPromoteur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="xid" Type="Int32" Nullable="false" />
           <Property Name="admin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Personnes" Relationship="Self.FK_Promoteur_Personnes" FromRole="Promoteur" ToRole="Personnes" />
           <NavigationProperty Name="Création_de_Projet" Relationship="ProjetSiteArchi3DModel.FK_Création_de_Projet_Promoteur" FromRole="Promoteur" ToRole="Création_de_Projet" />
+          <NavigationProperty Name="Account" Relationship="ProjetSiteArchi3DModel.FK_Promoteur_Account" FromRole="Promoteur" ToRole="Account" />
         </EntityType>
         <EntityType Name="Qualité">
           <Key>
@@ -459,7 +449,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Qualité1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Personnes" Relationship="Self.FK_Personnes_Qualité" FromRole="Qualité" ToRole="Personnes" />
+          <NavigationProperty Name="Account" Relationship="ProjetSiteArchi3DModel.FK_Account_Qualité" FromRole="Qualité" ToRole="Account" />
         </EntityType>
         <EntityType Name="QuestionnaireProjet">
           <Key>
@@ -498,18 +488,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Architecte_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
-          <End Role="Architecte" Type="Self.Architecte" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personnes">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Architecte">
-              <PropertyRef Name="xid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ListePrestataires_Architecte">
           <End Role="Architecte" Type="Self.Architecte" Multiplicity="1" />
           <End Role="Liste_de_Prestataires" Type="Self.Liste_de_Prestataires" Multiplicity="*" />
@@ -519,18 +497,6 @@
             </Principal>
             <Dependent Role="Liste_de_Prestataires">
               <PropertyRef Name="xidPrestas" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Commentaires_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
-          <End Role="Commentaires" Type="Self.Commentaires" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personnes">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Commentaires">
-              <PropertyRef Name="xidPersonnes" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -546,81 +512,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Modélisateurs_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
-          <End Role="Modélisateurs" Type="Self.Modélisateurs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personnes">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Modélisateurs">
-              <PropertyRef Name="xid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Personnes_Qualité">
-          <End Role="Qualité" Type="Self.Qualité" Multiplicity="1" />
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Qualité">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Personnes">
-              <PropertyRef Name="Qualité" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Promoteur_Personnes">
-          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
-          <End Role="Promoteur" Type="Self.Promoteur" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personnes">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Promoteur">
-              <PropertyRef Name="xid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ProjetSiteArchi3DEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Architecte" EntityType="Self.Architecte" />
           <EntitySet Name="Archives" EntityType="Self.Archives" />
           <EntitySet Name="Commentaires" EntityType="Self.Commentaires" />
           <EntitySet Name="Liste_de_Prestataires" EntityType="Self.Liste_de_Prestataires" />
           <EntitySet Name="Modélisateurs" EntityType="Self.Modélisateurs" />
-          <EntitySet Name="Personnes" EntityType="Self.Personnes" />
           <EntitySet Name="Promoteur" EntityType="Self.Promoteur" />
           <EntitySet Name="Qualité" EntityType="Self.Qualité" />
           <EntitySet Name="QuestionnaireProjet" EntityType="Self.QuestionnaireProjet" />
           <EntitySet Name="Signup" EntityType="Self.Signup" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_Architecte_Personnes" Association="Self.FK_Architecte_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
-            <End Role="Architecte" EntitySet="Architecte" />
-          </AssociationSet>
           <AssociationSet Name="FK_ListePrestataires_Architecte" Association="Self.FK_ListePrestataires_Architecte">
             <End Role="Architecte" EntitySet="Architecte" />
             <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
           </AssociationSet>
-          <AssociationSet Name="FK_Commentaires_Personnes" Association="Self.FK_Commentaires_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
-            <End Role="Commentaires" EntitySet="Commentaires" />
-          </AssociationSet>
           <AssociationSet Name="FK_ListePrestataires_Modélisateurs" Association="Self.FK_ListePrestataires_Modélisateurs">
             <End Role="Modélisateurs" EntitySet="Modélisateurs" />
             <End Role="Liste_de_Prestataires" EntitySet="Liste_de_Prestataires" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Modélisateurs_Personnes" Association="Self.FK_Modélisateurs_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
-            <End Role="Modélisateurs" EntitySet="Modélisateurs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Personnes_Qualité" Association="Self.FK_Personnes_Qualité">
-            <End Role="Qualité" EntitySet="Qualité" />
-            <End Role="Personnes" EntitySet="Personnes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Promoteur_Personnes" Association="Self.FK_Promoteur_Personnes">
-            <End Role="Personnes" EntitySet="Personnes" />
-            <End Role="Promoteur" EntitySet="Promoteur" />
           </AssociationSet>
           <EntitySet Name="Création_de_Projet" EntityType="ProjetSiteArchi3DModel.Création_de_Projet" />
           <EntitySet Name="Projet" EntityType="ProjetSiteArchi3DModel.Projet" />
@@ -655,6 +564,27 @@
           <FunctionImport Name="sp_architecte" ReturnType="Collection(ProjetSiteArchi3DModel.sp_architecte_Result)" />
           <FunctionImport Name="sp_modelisateur" ReturnType="Collection(ProjetSiteArchi3DModel.sp_modelisateur_Result)" />
           <FunctionImport Name="sp_promoteur" ReturnType="Collection(ProjetSiteArchi3DModel.sp_promoteur_Result)" />
+          <EntitySet Name="Account" EntityType="ProjetSiteArchi3DModel.Account" />
+          <AssociationSet Name="FK_Account_Qualité" Association="ProjetSiteArchi3DModel.FK_Account_Qualité">
+            <End Role="Qualité" EntitySet="Qualité" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Architecte_Account" Association="ProjetSiteArchi3DModel.FK_Architecte_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Architecte" EntitySet="Architecte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commentaires_Account" Association="ProjetSiteArchi3DModel.FK_Commentaires_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Commentaires" EntitySet="Commentaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modélisateurs_Account" Association="ProjetSiteArchi3DModel.FK_Modélisateurs_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Modélisateurs" EntitySet="Modélisateurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promoteur_Account" Association="ProjetSiteArchi3DModel.FK_Promoteur_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Promoteur" EntitySet="Promoteur" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Création_de_Projet">
           <Key>
@@ -786,6 +716,86 @@
           <Property Type="String" Name="prénom" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="qualité" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prénom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfirmPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Société" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="N__TVA" Type="Int32" Nullable="false" />
+          <Property Name="Qualité" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Qualité1" Relationship="ProjetSiteArchi3DModel.FK_Account_Qualité" FromRole="Account" ToRole="Qualité" />
+          <NavigationProperty Name="Architecte" Relationship="ProjetSiteArchi3DModel.FK_Architecte_Account" FromRole="Account" ToRole="Architecte" />
+          <NavigationProperty Name="Commentaires" Relationship="ProjetSiteArchi3DModel.FK_Commentaires_Account" FromRole="Account" ToRole="Commentaires" />
+          <NavigationProperty Name="Modélisateurs" Relationship="ProjetSiteArchi3DModel.FK_Modélisateurs_Account" FromRole="Account" ToRole="Modélisateurs" />
+          <NavigationProperty Name="Promoteur" Relationship="ProjetSiteArchi3DModel.FK_Promoteur_Account" FromRole="Account" ToRole="Promoteur" />
+        </EntityType>
+        <Association Name="FK_Account_Qualité">
+          <End Type="ProjetSiteArchi3DModel.Qualité" Role="Qualité" Multiplicity="1" />
+          <End Type="ProjetSiteArchi3DModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualité">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Qualité" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Architecte_Account">
+          <End Type="ProjetSiteArchi3DModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="ProjetSiteArchi3DModel.Architecte" Role="Architecte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Architecte">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commentaires_Account">
+          <End Type="ProjetSiteArchi3DModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="ProjetSiteArchi3DModel.Commentaires" Role="Commentaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Commentaires">
+              <PropertyRef Name="xidPersonnes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modélisateurs_Account">
+          <End Type="ProjetSiteArchi3DModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="ProjetSiteArchi3DModel.Modélisateurs" Role="Modélisateurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Modélisateurs">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promoteur_Account">
+          <End Type="ProjetSiteArchi3DModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="ProjetSiteArchi3DModel.Promoteur" Role="Promoteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Promoteur">
+              <PropertyRef Name="xid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -835,17 +845,6 @@
               <MappingFragment StoreEntitySet="Modélisateurs">
                 <ScalarProperty Name="idModélisateur" ColumnName="idModélisateur" />
                 <ScalarProperty Name="xid" ColumnName="xid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Personnes">
-            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Personnes">
-              <MappingFragment StoreEntitySet="Personnes">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Qualité" ColumnName="Qualité" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -957,6 +956,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="ProjetSiteArchi3DModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Qualité" ColumnName="Qualité" />
+                <ScalarProperty Name="N__TVA" ColumnName="N° TVA" />
+                <ScalarProperty Name="Société" ColumnName="Société" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
